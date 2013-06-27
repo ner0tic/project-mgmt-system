@@ -1,0 +1,60 @@
+millwright_menu:
+    renderers:
+        renderer: null
+        rendererOptions:
+            template: PMSUserBundle:Menu:layout.html.twig
+    items:
+########
+# HOME #
+########
+        homepage:
+            label: 'home'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+###########
+# SIGN IN #
+###########
+        fos_user_security_login:
+            label: 'sign in'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+############
+# SIGN OUT #
+############
+        fos_user_security_logout:
+            label: 'sign out'
+            roles: ROLE_USER
+###########
+# SIGN UP #
+###########
+        fos_user_registration_register:
+            label: 'sign up'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+###################
+# PROFILE :: SHOW #
+###################
+        fos_user_profile_show:
+            label: 'profile'
+            roles: ROLE_USER
+###################
+# PROFILE :: EDIT #
+###################
+        fos_user_profile_edit:
+            label: 'edit profile'
+            roles: ROLE_USER
+###################
+# CHANGE PASSWORD #
+###################
+        fos_user_change_password:
+            label: 'change password'
+            roles: ROLE_USER
+    tree:
+        project_index_actions:
+            type: menu
+            children:
+                project_add: ~
+
+        project_actions:
+            type: actions
+            children:
+                project_show: ~
+                project_edit: ~
+                project_delete: ~
