@@ -1,0 +1,29 @@
+<?php
+namespace Scss\UserBundle\DataFixtures\ORM;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Scss\UserBundle\Entity\Admin;
+
+class LoadAdminData extends AbstractFixture implements OrderedFixtureInterface
+{
+    public function load(ObjectManager $manager)
+    {
+        $admin1 = new User();
+        $admin1->setUsername('admin');
+        $admin1->setPassword('g4t0rade');
+        $admin1->setEmail('ner0tic@daviddurost.net');
+        $admin1->setFirstName('David');
+        $admin1->setLastName('Durost');
+        $manager->persist($admin1);
+        $this->addReference('admin-david-durost', $admin1);
+
+        $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 2;
+    }
+}
