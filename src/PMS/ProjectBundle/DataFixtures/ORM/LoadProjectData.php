@@ -23,4 +23,9 @@ class LoadProjectData extends AbsrtactFixture implements OrderedFixtureInterface
         $this->addReference('project-demo1', $demo1);
         $manager->flush();
     }
+
+    public function getOrder()
+    {
+        return 6;
+    }
 }

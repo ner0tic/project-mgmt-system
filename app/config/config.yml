@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: doctrine-extensions.yml }
+    - { resource: doctrine_extensions.yml }
     - { resource: services.yml }
     - { resource: menu.yml }
 
@@ -14,7 +14,7 @@ framework:
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: %kernel_debug%
+        strict_requirements: %kernel.debug%
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
@@ -74,7 +74,7 @@ doctrine:
                 auto_mapping: true
                 mappings:
                     FOSUserBundle: ~
-                    PMSUserBundle:~
+                    PMSUserBundle: ~
                     gedmo_translatable:
                         type: annotation
                         prefix: Gedmo\Translatable\Entity
@@ -153,7 +153,7 @@ jms_aop:
     cache_dir: %kernel.cache_dir%/jms_aop
 
 ################################################################################
-## KNP CONFIGURATION
+## KNP Configuration
 ################################################################################
 knp_menu:
     twig: # false
@@ -161,7 +161,7 @@ knp_menu:
     default_renderer: twig
 
 ################################################################################
-## PUGX CONFIGURATION
+## PUGX Configuration
 ################################################################################
 parameters:
     pugx_user_discriminator_parameters:

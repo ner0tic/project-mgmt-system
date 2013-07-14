@@ -8,10 +8,6 @@ pms_user:
     type:     annotation
     prefix:   /
 
-developer_registration:
-    pattern:  /signup/developer
-    defaults: { _controller: PMSUserBundle:RegistrationUserOne:register }
-
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

@@ -8,15 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use PMS\ProjectBundle\Entity\Project;
 use PMS\ProjectBundle\Form\Type\ProjectType;
 
-/**
- * @Menu(translateDomain="MillwrightMenuBundle")
- */
 class ProjectController extends Controller
 {
     /**
      * @Route("/", name="pms_projects_index")
      * @Template("PMS\ProjectBundle:Project:index.html.twig")
-     * @Menu(label="projects")
      */
     public function indexAction()
     {
@@ -59,9 +55,6 @@ class ProjectController extends Controller
     /**
      * @Route("/new", name="pms_project_new")
      * @Template("PMS\ProjectBundle:Project:new.html.twig")
-     * @Secure(roles="ROLE_DEVELOPER_ADMIN")
-     * @SecureParam(name="project", permissions="EDIT")
-     * @Menu(label="add a project")
      */
     public function newAction(Request $request)
     {

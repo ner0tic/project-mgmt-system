@@ -9,7 +9,6 @@ use PMS\ProjectBundle\Entity\Status;
 use PMS\ProjectBundle\Form\Type\StatusType;
 
 /**
- * @Menu(translateDomain="MillwrightMenuBundle")
  * @Route("/statuses")
  */
 class StatusController extends Controller
@@ -17,7 +16,6 @@ class StatusController extends Controller
     /**
      * @Route("/", name="pms_status_index")
      * @Template("PMS\ProjectBundle:Status:index.html.twig")
-     * @Menu(label="statuses")
      */
     public function indexAction()
     {
@@ -58,9 +56,6 @@ class StatusController extends Controller
     /**
      * @Route("/statuses/new", name="pms_status_new")
      * @Template("PMS\ProjectBundle:Status:new.html.twig")
-     * @Menu(label="add a status")
-     * @Secure(roles="ROLE_ADMIN")
-     * @SecureParam(name="category", permission="EDIT")
      */
     public function newAction(Request $request)
     {

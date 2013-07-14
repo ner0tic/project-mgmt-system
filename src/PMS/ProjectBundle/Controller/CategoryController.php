@@ -9,7 +9,6 @@ use PMS\ProjectBundle\Entity\Category;
 use PMS\ProjectBundle\Form\Type\CategoryType;
 
 /**
- * @Menu(translateDomain="MillwrightMenuBundle")
  * @Route("/categories")
  */
 class CategoryController extends Controller
@@ -17,7 +16,6 @@ class CategoryController extends Controller
     /**
      * @Route("/categories", name="pms_category_index")
      * @Template("PMS\ProjectBundle:Category:index.html.twig")
-     * @Menu(label="categories")
      */
     public function indexAction()
     {
@@ -58,9 +56,6 @@ class CategoryController extends Controller
     /**
      * @Route("/categories/new", name="pms_category_new")
      * @Template("PMS\ProjectBundle:Category:new.html.twig")
-     * @Menu(label="add a category")
-     * @Secure(roles="ROLE_ADMIN")
-     * @SecureParam(name="category", permission="EDIT")
      */
     public function newAction(Request $request)
     {
