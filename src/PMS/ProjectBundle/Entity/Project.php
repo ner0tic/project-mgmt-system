@@ -13,7 +13,7 @@ use PMS\UserBundle\Traits\SlugableTrait;
  * PMS\ProjectBundle\Entity\Project
  *
  * @ORM\Table(name="project")
- * @ORM\Entity(repositoryClass="PMS\ProjectBundle\Entity\ProjectRepository")
+ * @ORM\Entity(repositoryClass="PMS\ProjectBundle\Entity\Repository\ProjectRepository")
  */
 class Project
 {

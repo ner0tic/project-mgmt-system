@@ -32,9 +32,18 @@ class ClientController extends Controller
     }
 
     /**
-     * @Template("PMS\UserBundle:Client:dashboard.html.twig")
+     * @Template("PMSUserBundle:Client:dashboard.html.twig")
      */
     public function dashboardAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/clients", name="pms_client_index")
+     * @Template("PMSUserBundle:Client:index.html.twig")
+     */
+    public function indexAction()
     {
         return array();
     }

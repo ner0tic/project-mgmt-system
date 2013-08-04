@@ -1,4 +1,3 @@
-
 <?php
 
 namespace PMS\ProjectBundle\Entity;
@@ -14,7 +13,7 @@ use PMS\UserBundle\Traits\SlugableTrait;
  * PMS\ProjectBundle\Entity\Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="PMS\ProjectBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="PMS\ProjectBundle\Entity\Repository\CategoryRepository")
  */
 class Category
 {

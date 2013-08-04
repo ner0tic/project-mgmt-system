@@ -32,9 +32,18 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Template("PMS\UserBundle:Developer:dashboard.html.twig")
+     * @Template("PMSUserBundle:Developer:dashboard.html.twig")
      */
     public function dashboardAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/developers", name="pms_developer_index")
+     * @Template("PMSUserBundle:Developer:index.html.twig")
+     */
+    public function indexAction()
     {
         return array();
     }

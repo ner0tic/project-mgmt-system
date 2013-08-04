@@ -24,12 +24,10 @@ class AppKernel extends Kernel
             new PMS\UserBundle\PMSUserBundle(),
             new PMS\ProjectBundle\PMSProjectBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Millwright\MenuBundle\MillwrightMenuBundle(),
-            new Millwright\ConfigurationBundle\MillwrightConfigurationBundle(),
-            new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new Elao\WebProfilerExtraBundle\WebProfilerExtraBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

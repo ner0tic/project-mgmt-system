@@ -3,3 +3,18 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+################################################################################
+## KnP Menu ####################################################################
+################################################################################
+    pms_menu.menu_builder:
+        class: PMS\UserBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    pms_menu.menu.main:
+        class: Knp\Menu\MenuItem
+        factory_service: pms_menu.menu_builder
+        factory_method: createMainMenu
+        arguments: [ "@request", "@service_container" ]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main }

@@ -8,15 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use PMS\ProjectBundle\Entity\Project;
 use PMS\ProjectBundle\Form\Type\ProjectType;
 
-/**
- * @Menu(translateDomain="MillwrightMenuBundle")
- */
 class ProjectController extends Controller
 {
     /**
-     * @Route("/", name="pms_projects_index")
-     * @Template("PMS\ProjectBundle:Project:index.html.twig")
-     * @Menu(label="projects")
+     * @Route("/", name="pms_project_index")
+     * @Template("PMSProjectBundle:Project:index.html.twig")
      */
     public function indexAction()
     {
@@ -33,7 +29,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/{slug}", name="pms_project_show")
-     * @Template("PMS\ProjectBundle:Project:show.html.twig")
+     * @Template("PMSProjectBundle:Project:show.html.twig")
      */
     public function showAction($slug)
     {
@@ -58,10 +54,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/new", name="pms_project_new")
-     * @Template("PMS\ProjectBundle:Project:new.html.twig")
-     * @Secure(roles="ROLE_DEVELOPER_ADMIN")
-     * @SecureParam(name="project", permissions="EDIT")
-     * @Menu(label="add a project")
+     * @Template("PMSProjectBundle:Project:new.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -92,5 +85,15 @@ class ProjectController extends Controller
         return array(
           'form' => $form->createView()
         );
+    }
+
+    /**
+     * @Route("/search/{query}", name="pms_project_search_q")
+     * @Route("/search", name="pms_project_search")
+     * @Template("PMSProjectBundle:Project:search.html.twig")
+     */
+    public function searchAction($query = null)
+    {
+        return array();
     }
 }

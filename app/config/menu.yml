@@ -1,8 +1,9 @@
 millwright_menu:
     renderers:
-        renderer: null
-        rendererOptions:
-            template: PMSUserBundle:Menu:layout.html.twig
+        navigation:
+            renderer: null
+            rendererOptions:
+                template: PMSUserBundle:Menu:menu.html.twig
     items:
 ########
 # HOME #
@@ -46,15 +47,201 @@ millwright_menu:
         fos_user_change_password:
             label: 'change password'
             roles: ROLE_USER
+####################
+# PROJECT :: INDEX #
+####################
+        pms_project_index:
+            label: 'projects'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+###################
+# PROJECT :: SHOW #
+###################
+        pms_project_show:
+            label: 'project'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+##################
+# PROJECT :: NEW #
+##################
+        pms_project_new:
+            label: 'add a project'
+            roles: ROLE_USER
+###################
+# PROJECT :: EDIT #
+###################
+        pms_project_edit:
+            label: 'edit project'
+            roles: ROLE_USER
+#####################
+# PROJECT :: REMOVE #
+#####################
+        pms_project_remove:
+            label: 'remove project'
+            roles: ROLE_USER
+#####################
+# PROJECT :: SEARCH #
+#####################
+        pms_project_search:
+            label: 'search for a project'
+#####################
+# CATEGORY :: INDEX #
+#####################
+        pms_category_index:
+            label: 'categories'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+####################
+# CATEGORY :: SHOW #
+####################
+        pms_category_show:
+            label: 'category'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+###################
+# CATEGORY :: NEW #
+###################
+        pms_category_new:
+            label: 'add a category'
+            roles: ROLE_USER
+####################
+# CATEGORY :: EDIT #
+####################
+        pms_category_edit:
+            label: 'edit category'
+            roles: ROLE_USER
+######################
+# CATEGORY :: REMOVE #
+######################
+        pms_category_remove:
+            label: 'remove category'
+            roles: ROLE_USER
+###################
+# STATUS :: INDEX #
+###################
+        pms_status_index:
+            label: 'statuses'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+##################
+# STATUS :: SHOW #
+##################
+        pms_status_show:
+            label: 'status'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+#################
+# STATUS :: NEW #
+#################
+        pms_status_new:
+            label: 'add a status'
+            roles: ROLE_USER
+##################
+# STATUS :: EDIT #
+##################
+        pms_status_edit:
+            label: 'edit status'
+            roles: ROLE_USER
+####################
+# STATUS :: REMOVE #
+####################
+        pms_status_remove:
+            label: 'remove status'
+            roles: ROLE_USER
+###################
+# CLIENT :: INDEX #
+###################
+        pms_client_index:
+            label: 'clients'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+##################
+# CLIENT :: SHOW #
+##################
+        pms_client_show:
+            label: 'client'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+#################
+# CLIENT :: NEW #
+#################
+        pms_client_new:
+            label: 'add a client'
+            roles: ROLE_USER
+##################
+# CLIENT :: EDIT #
+##################
+        pms_client_edit:
+            label: 'edit client'
+            roles: ROLE_USER
+####################
+# CLIENT :: REMOVE #
+####################
+        pms_client_index:
+            label: 'remove client'
+            roles: ROLE_USER
+######################
+# DEVELOPER :: INDEX #
+######################
+        pms_developer_index:
+            label: 'developers'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+#####################
+# DEVELOPER :: SHOW #
+#####################
+        pms_developer_show:
+            label: 'developer'
+            roles: IS_AUTHENTICATED_ANONYMOUSLY
+####################
+# DEVELOPER :: NEW #
+####################
+        pms_developer_new:
+            label: 'add a developer'
+            roles: ROLE_USER
+#####################
+# DEVELOPER :: EDIT #
+#####################
+        pms_developer_edit:
+            label: 'edit developer'
+            roles: ROLE_USER
+#######################
+# DEVELOPER :: REMOVE #
+#######################
+        pms_developer_index:
+            label: 'remove developer'
+            roles: ROLE_USER
     tree:
-        project_index_actions:
-            type: menu
+#############
+# MAIN MENU #
+#############
+        main:
+            type: navigation
             children:
-                project_add: ~
+                homepage: ~
+                pms_project_index:
+                    attributes:
+                        'class': 'dropdown'
+                    childrenAttributes:
+                        'dropdown': true
+                    children:
+                        pms_project_new: ~
+                        pms_project_search: ~
+                        pms_category_index: ~
+#                            children:
+#                                pms_category_new: ~
+                        pms_status_index: ~
+#                            children:
+#                                pms_status_new: ~
+                fos_user_profile_show:
+                    children:
+                        fos_user_profile_edit: ~
 
-        project_actions:
-            type: actions
+
+                        fos_user_change_password: ~
+                        fos_user_security_logout: ~
+        nonAuth:
+            type: navigation
             children:
-                project_show: ~
-                project_edit: ~
-                project_delete: ~
+                homepage: ~
+                pms_project_index:
+                    children:
+                        pms_project_search: ~
+                        pms_category_index: ~
+                        pms_status_index: ~
+                fos_user_registration_register: ~
+                fos_user_security_login: ~
+
+
+

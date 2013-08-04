@@ -32,7 +32,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Template("PMS\UserBundle:Admin:dashboard.html.twig")
+     * @Template("PMSUserBundle:Admin:dashboard.html.twig")
      */
     public function dashboardAction()
     {

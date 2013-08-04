@@ -1,9 +1,9 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: doctrine-extensions.yml }
+    - { resource: doctrine_extensions.yml }
     - { resource: services.yml }
-    - { resource: menu.yml }
+#    - { resource: menu.yml }
 
 #####################################################################################
 ## Framwork Configuration
@@ -14,7 +14,7 @@ framework:
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: %kernel_debug%
+        strict_requirements: %kernel.debug%
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
@@ -46,10 +46,38 @@ assetic:
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
-        #closure:
-        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
-        #yui_css:
-        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+        less:
+            node: /usr/bin/nodejs
+            node_paths: [ /usr/local/lib/node_modules/ ]
+            apply_to:   "\.less$"
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../src/PMS/UserBundle/Resources/public/less/build.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap.css
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-transition.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-alert.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-button.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-carousel.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-collapse.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-dropdown.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-modal.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tooltip.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-popover.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-scrollspy.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tab.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-typeahead.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-affix.js
+            output: js/bootstrap.js
+        jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.9.1.js
+            output: js/jquery.js
 
 #####################################################################################
 ## Doctrine Configuration
@@ -74,7 +102,7 @@ doctrine:
                 auto_mapping: true
                 mappings:
                     FOSUserBundle: ~
-                    PMSUserBundle:~
+                    PMSUserBundle: ~
                     gedmo_translatable:
                         type: annotation
                         prefix: Gedmo\Translatable\Entity
@@ -141,7 +169,7 @@ fos_user:
 ## JMS Configuration
 ################################################################################
 jms_security_extra:
-    secure_all_services: true
+    secure_all_services: false
     enable_iddqd_attribute: false
     expressions: false
     voters:
@@ -153,7 +181,7 @@ jms_aop:
     cache_dir: %kernel.cache_dir%/jms_aop
 
 ################################################################################
-## KNP CONFIGURATION
+## KNP Configuration
 ################################################################################
 knp_menu:
     twig: # false
@@ -161,23 +189,23 @@ knp_menu:
     default_renderer: twig
 
 ################################################################################
-## PUGX CONFIGURATION
+## PUGX Configuration
 ################################################################################
-parameters:
-    pugx_user_discriminator_parameters:
-        classes:
-            developer:
-                entity: PMS\UserBundle\Entity\Developer
-                registration: PMS\UserBundle\Form\Type\RegistrationDeveloperFormType
-                profile: PMS\UserBundle\Form\Type\ProfileDeveloperFormType
-                factory: ~
-            client:
-                entity: PMS\UserBundle\Entity\Client
-                registration: PMS\UserBundle\Form\Type\RegistrationClientFormType
-                profile: PMS\UserBundle\Form\Type\ProfileClientFormType
-                factory: ~
-            admin:
-                entity: PMS\UserBundle\Entity\Admin
-                registration: PMS\UserBundle\Form\Type\RegistrationAdminFormType
-                profile: PMS\UserBundle\Form\Type\ProfileAdminFormType
-                factory: ~
+#parameters:
+#    pugx_user_discriminator_parameters:
+#        classes:
+#            developer:
+#                entity: PMS\UserBundle\Entity\Developer
+#                registration: PMS\UserBundle\Form\Type\RegistrationDeveloperFormType
+#                profile: PMS\UserBundle\Form\Type\ProfileDeveloperFormType
+#                factory: ~
+#            client:
+#                entity: PMS\UserBundle\Entity\Client
+#                registration: PMS\UserBundle\Form\Type\RegistrationClientFormType
+#                profile: PMS\UserBundle\Form\Type\ProfileClientFormType
+#                factory: ~
+#            admin:
+#                entity: PMS\UserBundle\Entity\Admin
+#                registration: PMS\UserBundle\Form\Type\RegistrationAdminFormType
+#                profile: PMS\UserBundle\Form\Type\ProfileAdminFormType
+#                factory: ~
