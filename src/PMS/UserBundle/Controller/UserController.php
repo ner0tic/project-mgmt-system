@@ -31,7 +31,22 @@ class UserController extends Controller
             }
         }
 
-        return array();
+        $projects = $this->getDoctrine()
+                         ->getRepository('PMSProjectBundle:Project')
+                         ->getRecent();
+        if (!$projects) {
+            $projects = array();
+        }
+
+        $carousel = array('items' => array());
+        foreach ($projects as $project) {
+            $carousel['items'][] = array(
+                'img' => '/bundles/pmsproject/img/' . $project->getSlug() . '/.png',
+                'caption' => $project->getDescription()
+            );
+        }
+
+        return array('carousel' => $carousel);
     }
 
     public function registerAction()

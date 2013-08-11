@@ -1,12 +1,12 @@
 <?php
-namespace PMS\CategoryBundle\DataFixtures\ORM;
+namespace PMS\ProjectBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use PMS\CategoryBundle\Entity\Category;
+use PMS\ProjectBundle\Entity\Category;
 
-class LoadCategoryData extends AbsrtactFixture implements OrderedFixtureInterface
+class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}

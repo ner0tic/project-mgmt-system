@@ -209,3 +209,15 @@ knp_menu:
 #                registration: PMS\UserBundle\Form\Type\RegistrationAdminFormType
 #                profile: PMS\UserBundle\Form\Type\ProfileAdminFormType
 #                factory: ~
+
+################################################################################
+## IMAGINE Configuration
+################################################################################
+liip_imagine:
+    filter_sets:
+        carousel_sm:
+            filters:
+                thumbnail: { size: [940, 400], mode: outbound }
+        carousel_lg:
+            filters:
+                thumbnail: { size: [1170, 400], mode: outbound }

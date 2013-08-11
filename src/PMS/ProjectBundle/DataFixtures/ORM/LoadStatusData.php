@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use PMS\ProjectBundle\Entity\Status;
 
-class LoadStatusData extends AbsrtactFixture implements OrderedFixtureInterface
+class LoadStatusData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}

@@ -1,0 +1,15 @@
+<div id="mainCarousel" class="carousel slide">
+    <div class="carousel-inner">
+    {% carousel_content %}
+        {% for key,item in items %}
+            <div class="item {{ 'item'~key }}">
+                <p class="caption">Blah</p>
+            </div>
+        {% endfor %}
+        {% block carousel_controls %}
+            <a class="carousel-control left" href="mainCarousel" data-slide="prev">‹</a>
+            <a class="carousel-control right" href="#mainCarousel" data-slide="next">›</a>
+        {% endblock %}
+    {% endblock %}
+    </div>
+</div>

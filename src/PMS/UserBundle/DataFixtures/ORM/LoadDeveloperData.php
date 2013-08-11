@@ -1,16 +1,16 @@
 <?php
-namespace Scss\UserBundle\DataFixtures\ORM;
+namespace PMS\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Scss\UserBundle\Entity\Developer;
+use PMS\UserBundle\Entity\Developer;
 
 class LoadDeveloperData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $dev1 = new User();
+        $dev1 = new Developer();
         $dev1->setUsername('ner0tic');
         $dev1->setPassword('g4t0rade');
         $dev1->setEmail('david.durost@gmail.com');

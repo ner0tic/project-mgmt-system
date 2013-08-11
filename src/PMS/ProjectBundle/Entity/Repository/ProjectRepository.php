@@ -11,4 +11,12 @@ class ProjectRepository extends SortableRepository
                     ->createQuery('SELECT p FROM PMSProjectBundle:Project p ORDER BY p.updated ASC')
                     ->getResult();
     }
+
+    public function getRecent($limit = 3)
+    {
+        return $this->getEntityManager()
+                    ->createQuery('SELECT p FROM PMSProjectBundle:Project p ORDER BY p.updated ASC')
+                    ->setMaxResults($limit)
+                    ->getResult();
+    }
 }

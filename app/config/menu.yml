@@ -3,7 +3,11 @@ millwright_menu:
         navigation:
             renderer: null
             rendererOptions:
+<<<<<<< HEAD
                 template: PMSUserBundle:Menu:menu.html.twig
+=======
+                template: PMSUserBundle:Menu:layout.html.twig
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
     items:
 ########
 # HOME #
@@ -74,6 +78,7 @@ millwright_menu:
 #####################
 # PROJECT :: REMOVE #
 #####################
+<<<<<<< HEAD
         pms_project_remove:
             label: 'remove project'
             roles: ROLE_USER
@@ -83,6 +88,12 @@ millwright_menu:
         pms_project_search:
             label: 'search for a project'
 #####################
+=======
+        pms_project_index:
+            label: 'remove project'
+            roles: ROLE_USER
+#####################
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
 # CATEGORY :: INDEX #
 #####################
         pms_category_index:
@@ -109,7 +120,11 @@ millwright_menu:
 ######################
 # CATEGORY :: REMOVE #
 ######################
+<<<<<<< HEAD
         pms_category_remove:
+=======
+        pms_category_index:
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
             label: 'remove category'
             roles: ROLE_USER
 ###################
@@ -139,6 +154,7 @@ millwright_menu:
 ####################
 # STATUS :: REMOVE #
 ####################
+<<<<<<< HEAD
         pms_status_remove:
             label: 'remove status'
             roles: ROLE_USER
@@ -202,6 +218,11 @@ millwright_menu:
         pms_developer_index:
             label: 'remove developer'
             roles: ROLE_USER
+=======
+        pms_status_index:
+            label: 'remove status'
+            roles: ROLE_USER
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
     tree:
 #############
 # MAIN MENU #
@@ -210,6 +231,7 @@ millwright_menu:
             type: navigation
             children:
                 homepage: ~
+<<<<<<< HEAD
                 pms_project_index:
                     attributes:
                         'class': 'dropdown'
@@ -245,3 +267,30 @@ millwright_menu:
 
 
 
+=======
+                pms_client_index: ~
+                    children:
+                        pms_client_new: ~
+                pms_developer_index:
+                    children:
+                        pms_developer_new: ~
+                pms_project_index:
+                    children:
+                        pms_project_new: ~
+                        pms_project_search: ~
+                        pms_category_index:
+                            children:
+                                pms_category_new: ~
+                        pms_status_index:
+                                pms_status_new: ~
+                fos_user_profile_show:
+                    children:
+                        fos_user_profile_edit: ~
+                        fos_user_change_password: ~
+                        fos_user_security_logout: ~
+                fos_user_registration_register: ~
+                fos_user_security_login: ~
+
+
+
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9

@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use PMS\ProjectBundle\Entity\Project;
 
-class LoadProjectData extends AbsrtactFixture implements OrderedFixtureInterface
+class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}

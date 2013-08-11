@@ -15,7 +15,11 @@ class CategoryController extends Controller
 {
     /**
      * @Route("/categories", name="pms_category_index")
+<<<<<<< HEAD
      * @Template("PMSProjectBundle:Category:index.html.twig")
+=======
+     * @Template("PMS\ProjectBundle:Category:index.html.twig")
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
      */
     public function indexAction()
     {
@@ -55,7 +59,11 @@ class CategoryController extends Controller
 
     /**
      * @Route("/categories/new", name="pms_category_new")
+<<<<<<< HEAD
      * @Template("PMSProjectBundle:Category:new.html.twig")
+=======
+     * @Template("PMS\ProjectBundle:Category:new.html.twig")
+>>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
      */
     public function newAction(Request $request)
     {

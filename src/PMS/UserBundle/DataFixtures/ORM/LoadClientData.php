@@ -1,10 +1,10 @@
 <?php
-namespace Scss\UserBundle\DataFixtures\ORM;
+namespace PMS\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Scss\UserBundle\Entity\Client;
+use PMS\UserBundle\Entity\Client;
 
 class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
 {
