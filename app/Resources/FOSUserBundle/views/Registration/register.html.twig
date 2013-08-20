@@ -1,0 +1,18 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+  {{ parent() }}
+<link rel="stylesheet" href="{{ asset('/css/form.css.php') }}" />
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+<script src="{{ asset('/js/jquery.infieldlabel.min.js') }}" type="text/javascript" ></script>
+<script src="{{ asset('/js/form.js') }}" type="text/javascript" ></script>
+{% endblock %}
+
+{% block fos_user_content %}
+<div class="signup-form-wrapper form-wrapper" id="signup-form">
+<h2>{{ 'sign up' | title }}</h2>
+<br />
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock %}

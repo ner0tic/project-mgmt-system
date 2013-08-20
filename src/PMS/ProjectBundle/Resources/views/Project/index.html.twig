@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -14,7 +14,54 @@
 <div class="fluid-row">
     <div class="span12">
         <h1>{{ 'projects' | title }}</h1>
-        {% include 'PMSUserBundle::datatable.html.twig' with { 'items': projects } %}
+        {% block function_bar %}
+        <div class="container span12 function-bar">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="icon-plus pull-left"></i>
+                        <a href="{{ path( 'pms_project_new' ) }}">{{ 'add a project' }}</a>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#">
+                        <i class="icon-share pull-left"></i>
+                        {{ 'share' }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endblock %}
+
+        {% block datatable %}
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <a href="#" class="sort-toggle">{{ 'name' | title }}</a>
+                </th>
+                <th>{{ 'description' | title }}</th>
+                <th>{{ 'status' | title }}</th>
+                <th>{{ 'category' | title }}</th>
+                <td></td>
+            </tr>
+            {% for project in projects %}
+            <tr>
+                <td><a href="{{ path( 'pms_project_show', { 'slug': project.slug } ) }}">{{ project.name }}</a></td>
+                <td>{{ project.description }}</td>
+                <td><a href="{{ path( 'pms_status_show', { 'slug': project.Status.slug } ) }}">{{ project.Status.name }}</a></td>
+                <td><a href="{{ path( 'pms_category_show', { 'slug': project.Category.slug } ) }}">{{ project.Category.name }}</a></td>
+                {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'slug': project.slug, 'type': 'project' } %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">
+                    <em>{{ 'no projects found.' | title }}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% include 'PMSUserBundle:Datatable:datatable.footer.html.twig' with { 'pager': pager } %}
+        {% endblock %}
     </div>
 </div>
 {% endblock %}

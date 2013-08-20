@@ -15,11 +15,7 @@ class StatusController extends Controller
 {
     /**
      * @Route("/", name="pms_status_index")
-<<<<<<< HEAD
      * @Template("PMSProjectBundle:Status:index.html.twig")
-=======
-     * @Template("PMS\ProjectBundle:Status:index.html.twig")
->>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
      */
     public function indexAction()
     {
@@ -59,11 +55,7 @@ class StatusController extends Controller
 
     /**
      * @Route("/statuses/new", name="pms_status_new")
-<<<<<<< HEAD
      * @Template("PMSProjectBundle:Status:new.html.twig")
-=======
-     * @Template("PMS\ProjectBundle:Status:new.html.twig")
->>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
      */
     public function newAction(Request $request)
     {

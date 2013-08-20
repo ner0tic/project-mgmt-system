@@ -1,0 +1,18 @@
+{% block datatable_content %}
+    <table class="table table-striped">
+        <tr>
+            {% for item in headers %}
+            <th>{{ item.name | title }}
+    {% for item in items %}
+        <tr>
+            <td><a href="{{ path('pms_'~type~'_show', {'slug': item.slug}) }}">{{ item.name | title }}</a></td>
+            <td>{{ item.description[:30] ~ '...' }}</td>
+            {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'type': type, 'slug': item.slug } %}
+        </tr>
+    {% else %}
+        <tr>
+            <th>{{ 'no results found.' | title }}</th>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

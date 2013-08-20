@@ -3,6 +3,17 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+
+    pms.twig.inflection_extension:
+        class: PMS\UserBundle\Twig\Extension\InflectionExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.debug:
+        class: Twig_Extension_Debug
+        tags:
+            - { name: twig.extension }
+
 ################################################################################
 ## KnP Menu ####################################################################
 ################################################################################

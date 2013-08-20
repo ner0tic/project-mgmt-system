@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -7,14 +7,26 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('/bundles/pmsuser/css/Base/show.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/bundles/pmsproject/css/category.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/bundles/pmsproject/css/project.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
 <div class="fluid-row">
-    <h1>{{ category.name | title }}</h1>
+    <div class="span12">
+        <h1>
+            <a href="{{ path('pms_category_index') }}">{{ 'categories' | title }}</a>
+            <i class="icon-arrow-right"></i>
+            {{ category.name | title }}
+        </h1>
+    </div>
     <p>{{ category.description }}</p>
-    {% if category.parent exists %}
-    <p>{{ category.parent }}</p>
+    <p>
+        {% if category.parent is not empty %}
+        <a href="{{ path( 'pms_category_show', { 'slug': category.parent.slug } ) }}">{{ category.parent.name | title }}
+        </a>
+        {% else %}
+        {{ 'none' | title }}
+        {% endif %}
+    </p>
 </div>
 {% endblock %}

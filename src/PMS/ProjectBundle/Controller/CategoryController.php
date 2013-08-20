@@ -6,7 +6,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use PMS\ProjectBundle\Entity\Category;
-use PMS\ProjectBundle\Form\Type\CategoryType;
+use PMS\ProjectBundle\Form\Type\CategoryFormType;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\View\TwitterBootstrapView;
 
 /**
  * @Route("/categories")
@@ -14,64 +18,38 @@ use PMS\ProjectBundle\Form\Type\CategoryType;
 class CategoryController extends Controller
 {
     /**
-     * @Route("/categories", name="pms_category_index")
-<<<<<<< HEAD
+     * @Route("/", name="pms_category_index")
      * @Template("PMSProjectBundle:Category:index.html.twig")
-=======
-     * @Template("PMS\ProjectBundle:Category:index.html.twig")
->>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
      */
     public function indexAction()
     {
         // get route name/params to decypher data to delimit by
-        $categories = $this->get('doctrine')
-                          ->getRepository('PMSProjectBundle:Category');
+        $query = $this->get('doctrine')
+                          ->getRepository('PMSProjectBundle:Category')
+                          ->createQueryBuilder('c')
+                          ->orderBy('c.updated, c.name', 'ASC');
 
-        if (!$categories) {
-            $categories = array();
-        }
+        $pager = new Pagerfanta(new DoctrineORMAdapter($query));
+        $pager->setMaxPerPage($this->getRequest()->get('pageMax', 5));
+        $pager->setCurrentPage($this->getRequest()->get('page', 1));
 
-        return array('categories' => $categories);
+        return array(
+          'categories' => $pager->getCurrentPageResults(),
+          'pager' => $pager
+        );
     }
 
     /**
-     * @Route("/{slug}", name="pms_category_show")
-     * @Template("PMSProjectBundle:Category:show.html.twig")
-     */
-    public function showAction($slug)
-    {
-        $category = $this->getDoctrine()
-                       ->getRepository('PMSProjectBundle:Category')
-                       ->findBySlug($slug);
-
-        if (!$category) {
-            $this->get('session')->getFlashBag()->add(
-                'error',
-                'no matching category found.'
-            );
-            $this->redirect(
-                $this->generateUrl('pms_category_index')
-            );
-        }
-
-        return array('category' => $category);
-    }
-
-    /**
-     * @Route("/categories/new", name="pms_category_new")
-<<<<<<< HEAD
+     * @Route("/new", name="pms_category_new")
      * @Template("PMSProjectBundle:Category:new.html.twig")
-=======
-     * @Template("PMS\ProjectBundle:Category:new.html.twig")
->>>>>>> 63db47beb7bff9f97294f89c4311eb3094f06fc9
      */
     public function newAction(Request $request)
     {
         $category = new Category();
-        $form = $this->createForm(new CategoryType(), $category);
+        $form = $this->createForm(new CategoryFormType(), $category);
 
-        if ('POST' == $request->getMethod()) {
-            $form->bindRequest($this->getRequest());
+        if ('POST' == $this->request->getMethod()) {
+            $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($category);
@@ -92,5 +70,62 @@ class CategoryController extends Controller
         return array(
           'form' => $form->createView()
         );
+    }
+
+    /**
+     * @Route("/{slug}/edit", name="pms_category_edit")
+     * @Template("PMSProjectBundle:Category:new.html.twig")
+     */
+    public function editAction($slug)
+    {
+
+        $project = $this->getDoctrine()
+                        ->getRepository('PMSProjectBundle:Category')
+                        ->findOneBySlug($slug);
+
+        $form = $this->createForm(new CategoryFormType(), $category);
+
+        if (!$category) {
+            $this->get('session')
+                 ->getFlashBag()
+                 ->add(
+                     'error',
+                     'could not find matching category.'
+                 );
+            $this->forward('pms_category_index');
+        }
+
+        return array('form' => $form);
+    }
+
+    /**
+     * @Route("/{slug}", name="pms_category_show")
+     * @Template("PMSProjectBundle:Category:show.html.twig")
+     */
+    public function showAction($slug)
+    {
+        $category = $this->getDoctrine()
+                       ->getRepository('PMSProjectBundle:Category')
+                       ->findOneBySlug($slug);
+
+        if (!$category) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'no matching category found.'
+            );
+            $this->redirect(
+                $this->generateUrl('pms_category_index')
+            );
+        }
+
+        return array('category' => $category);
+    }
+
+    /**
+     * @Route("/{slug}/remove", name="pms_category_delete")
+     */
+    public function removeAction(Request $request)
+    {
+        return array();
     }
 }

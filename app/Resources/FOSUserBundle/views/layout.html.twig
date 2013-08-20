@@ -1,0 +1,27 @@
+{# app/Resources/FOSUserBundle/views/layout.html.twig #}
+{% extends '::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('/bundles/pmsuser/css/Security/auth.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="{{ asset('/bundles/pmsuser/js/Security/auth.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="box-content datagrid">
+    <div>
+    {% for key, message in app.session.getFlashBag() %}
+      <div class="{{ key }}">
+        {{ message|trans({}, 'FOSUserBundle') }}
+      </div>
+    {% endfor %}
+    {%block fos_user_content %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}

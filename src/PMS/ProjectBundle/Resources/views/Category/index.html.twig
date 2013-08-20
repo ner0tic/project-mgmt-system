@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -14,7 +14,58 @@
 <div class="fluid-row">
     <div class="span12">
         <h1>{{ 'categories' | title }}</h1>
-        {% include 'PMSUserBundle::datatable.html.twig' with { 'items': categories } %}
+        {% block function_bar %}
+        <div class="container span12 function-bar">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="icon-plus pull-left"></i>
+                        <a href="{{ path( 'pms_category_new' ) }}">{{ 'add a category' }}</a>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#">
+                        <i class="icon-share pull-left"></i>
+                        {{ 'share' }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endblock %}
+
+        {% block datatable %}
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <a href="#" class="sort-toggle">{{ 'name' | title }}</a>
+                </th>
+                <th>{{ 'description' | title }}</th>
+                <th>{{ 'parent' | title }}</th>
+                <td></td>
+            </tr>
+            {% for category in categories %}
+            <tr>
+                <td><a href="{{ path( 'pms_category_show', { 'slug': category.slug } ) }}">{{ category.name }}</a></td>
+                <td>{{ category.description }}</td>
+                <td>
+                    {% if category.parent is not empty %}
+                    <a href="{{ path( 'pms_category_show', { 'slug': category.parent.slug } ) }}">{{ category.parent.name }}</a>
+                    {% else %}
+                    <em>{{ 'none' | title }}</em>
+                    {% endif %}
+                </td>
+                {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'slug': category.slug, 'type': 'category' } %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">
+                    <em>{{ 'no categories found.' | title }}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% include 'PMSUserBundle:Datatable:datatable.footer.html.twig' with { 'pager': pager } %}
+        {% endblock %}
     </div>
 </div>
 {% endblock %}

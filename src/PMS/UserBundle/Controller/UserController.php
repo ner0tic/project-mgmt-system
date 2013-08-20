@@ -41,7 +41,7 @@ class UserController extends Controller
         $carousel = array('items' => array());
         foreach ($projects as $project) {
             $carousel['items'][] = array(
-                'img' => '/bundles/pmsproject/img/' . $project->getSlug() . '/.png',
+                'img' => '/bundles/pmsproject/img/projects/' . $project->getSlug() . '/carousel.png',
                 'caption' => $project->getDescription()
             );
         }

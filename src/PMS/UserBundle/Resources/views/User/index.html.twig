@@ -5,14 +5,16 @@
         <div id="myCarousel" class="carousel slide">
             <div class="carousel-inner">
                 {% for key, item in carousel.items %}
-                    {% set active = (1 == key ? 'active' : '') %}
+                    {% set active = (0 == key ? 'active' : '') %}
                     <div class="item {{ active~' item'~(1+key) }}" style="background: transparent url('{{ item.img }}');">
                         <p class="caption">{{item.caption[:30] }}</p>
                     </div>
                 {% endfor %}
             </div>
+            {% if 1 < carousel.items|length %}
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            {% endif %}
         </div>
     {% endblock %}
     {% block home_columns %}

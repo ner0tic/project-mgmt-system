@@ -33,8 +33,8 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     form:
-        resources:
-            - "BcBootstrapBundle:Form:form_div_layout.html.twig"
+        resources: ~
+#            - "BcBootstrapBundle:Form:form_div_layout.html.twig"
 
 #####################################################################################
 ## Assetic Configuration
@@ -155,9 +155,8 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: PMS\UserBundle\Entity\User
-    registration:
-        form:
-            type: pms_user_registration
+    service:
+        user_manager: pugx_user_manager
 #fos_facebook:
 #  alias:  facebook
 #  app_id: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -191,24 +190,50 @@ knp_menu:
 ################################################################################
 ## PUGX Configuration
 ################################################################################
-#parameters:
-#    pugx_user_discriminator_parameters:
-#        classes:
-#            developer:
-#                entity: PMS\UserBundle\Entity\Developer
-#                registration: PMS\UserBundle\Form\Type\RegistrationDeveloperFormType
-#                profile: PMS\UserBundle\Form\Type\ProfileDeveloperFormType
-#                factory: ~
-#            client:
-#                entity: PMS\UserBundle\Entity\Client
-#                registration: PMS\UserBundle\Form\Type\RegistrationClientFormType
-#                profile: PMS\UserBundle\Form\Type\ProfileClientFormType
-#                factory: ~
-#            admin:
-#                entity: PMS\UserBundle\Entity\Admin
-#                registration: PMS\UserBundle\Form\Type\RegistrationAdminFormType
-#                profile: PMS\UserBundle\Form\Type\ProfileAdminFormType
-#                factory: ~
+pugx_multi_user:
+    users:
+        developer:
+            entity:
+                class: PMS\UserBundle\Entity\Developer
+            registration:
+                form:
+                    type: PMS\UserBundle\Form\Type\RegistrationDeveloperFormType
+                    name: fos_user_registration_form
+                    validation_groups: [Profile, Default, Developer]
+                template: PMSUserBundle:Developer:registration.form.html.twig
+            profile:
+                form:
+                    type: PMS\UserBundle\Form\Type\ProfileDeveloperFormType
+                    name: fos_user_profile_form
+                    validation_groups: [Profile, Default, Developer]
+        client:
+            entity:
+                class: PMS\UserBundle\Entity\Client
+            registration:
+                form:
+                    type: PMS\UserBundle\Form\Type\RegistrationClientFormType
+                    name: fos_user_registration_form
+                    validation_groups: [Profile, Default, Client]
+                template: PMSUserBundle:Client:registration.form.html.twig
+            profile:
+                form:
+                    type: PMS\UserBundle\Form\Type\ProfileClientFormType
+                    name: fos_user_profile_form
+                    validation_groups: [Profile, Default, Client]
+        admin:
+            entity:
+                class: PMS\UserBundle\Entity\Admin
+            registration:
+                form:
+                    type: PMS\UserBundle\Form\Type\RegistrationAdminFormType
+                    name: fos_user_registration_form
+                    validation_groups: [Profile, Default, Admin]
+                template: PMSUserBundle:Admin:registration.form.html.twig
+            profile:
+                form:
+                    type: PMS\UserBundle\Form\Type\ProfileAdminFormType
+                    name: fos_user_profile_form
+                    validation_groups: [Profile, Default]
 
 ################################################################################
 ## IMAGINE Configuration
@@ -221,3 +246,9 @@ liip_imagine:
         carousel_lg:
             filters:
                 thumbnail: { size: [1170, 400], mode: outbound }
+
+###############################################################################
+## PAGERFANTA Configuration
+###############################################################################
+white_october_pagerfanta:
+    default_view: twitter_bootstrap

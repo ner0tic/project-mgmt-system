@@ -18,7 +18,8 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $demo1->setUrl('http://127.0.0.1');
         $demo1->setStatus($this->getReference('status-planning'));
         $demo1->setCategory($this->getReference('category-demo1'));
-        $demo1->setClient($this->getReference('client-testclient1'));
+        $demo1->setClient($this->getReference('client-david-durost'));
+        $demo1->setDescription('demo project.');
         $manager->persist($demo1);
         $this->addReference('project-demo1', $demo1);
         $manager->flush();

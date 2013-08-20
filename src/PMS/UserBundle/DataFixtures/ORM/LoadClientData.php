@@ -11,7 +11,7 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $client_self = new Client();
-        $client_self->setUsername('self');
+        $client_self->setUsername('ddurost');
         $client_self->setPassword('g4t0rade');
         $client_self->setEmail('david@daviddurost.net');
         $client_self->setFirstName('David');

@@ -138,7 +138,7 @@ class MenuBuilder extends ContainerAware
         $this->securityContext = $container->get('security.context');
 
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav');
+        $menu->setChildrenAttribute('class', 'nav pull-right');
 
         // $menu->addChild('home', array('route' => 'homepage'));
 
@@ -153,8 +153,18 @@ class MenuBuilder extends ContainerAware
         if ($this->securityContext->isGranted('ROLE_USER')) {
             $menu->addChild($this->profileMenu());
         } else {
-            $menu->addChild('sign up', array('route' => 'fos_user_registration_register'));
+            $menu->addChild(
+                'sign up',
+                array(
+                    'route' => 'fos_user_registration_register',
+                    'childAttributes'   =>  array('dropdown' => true)
+                )
+            );
+            $menu['sign up']->addChild('as a developer', array('route' => 'developer_registration'));
+            $menu['sign up']->addChild('as a client', array('route' => 'client_registration'));
+
             $menu->addChild('sign in', array('route' => 'fos_user_security_login'));
+
         }
 
         return $menu;

@@ -52,4 +52,94 @@ trait ProjectTrait
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     protected $client;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status = null)
+    {
+        if ($status instanceof Status) {
+            $this->status = $status;
+        }
+
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category = null)
+    {
+        if ($category instanceof Category) {
+            $this->category = $category;
+        }
+
+        return $this;
+    }
+
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    public function setClient($client = null)
+    {
+        if ($client instanceof Client) {
+            $this->client = $client;
+        }
+
+        return $this;
+    }
 }

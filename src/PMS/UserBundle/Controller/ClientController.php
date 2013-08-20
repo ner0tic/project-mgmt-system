@@ -9,26 +9,12 @@ class ClientController extends Controller
 {
     /**
      * @Route("/signup/client", name="client_registration")
-     * @Template("PMSUserBundle:Client:register.html.twig")
      */
     public function registerAction()
     {
-        $handler = $this->container->get('pugx_multi_user.controller.handler');
-        $discriminator = $this->container->get('pugx_user_discriminator');
-
-        $return = $handler->registration('PMS\UserBundle\Entity\Admin');
-        $form = $discriminator->getRegistrationForm();
-
-        if ($return instanceof RedirectResponse) {
-            return $return;
-        }
-
-        /** @todo fix this! */
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
-        }
-
-        return array('form' => $form->createView());
+        return $this->container
+                    ->get('pugx_multi_user.registration_manager')
+                    ->register('PMS\UserBundle\Entity\Client');
     }
 
     /**
@@ -37,6 +23,29 @@ class ClientController extends Controller
     public function dashboardAction()
     {
         return array();
+    }
+
+    /**
+     * @Route("/{slug}", name="pms_client_show")
+     * @Template("PMSUserBundle:Client:show.html.twig")
+     */
+    public function showAction($slug)
+    {
+        $client = $this->getDoctrine()
+                        ->getRepository('PMSUserBundle:Client')
+                        ->findOneBySlug($slug);
+
+        if (!$client) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'no matching client found.'
+            );
+            $this->redirect(
+                $this->generateUrl('pms_client_index')
+            );
+        }
+
+        return array('client' => $client);
     }
 
     /**

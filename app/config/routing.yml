@@ -1,3 +1,13 @@
+pms_category:
+    resource: "@PMSProjectBundle/Controller/"
+    type:     annotation
+    prefix:   /projects/categories
+
+pms_project:
+    resource: "@PMSProjectBundle/Controller/"
+    type:     annotation
+    prefix:   /projects/statuses
+
 pms_project:
     resource: "@PMSProjectBundle/Controller/"
     type:     annotation
@@ -8,8 +18,15 @@ pms_user:
     type:     annotation
     prefix:   /
 
-fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+fos_user_security_login:
+    pattern: /signin
+    defaults: { _controller: FOSUserBundle:Security:login }
+fos_user_security_check:
+    pattern: /signin-check
+    defaults: { _controller: FOSUserBundle:Security:check }
+fos_user_security_logout:
+    pattern: /signout
+    defaults: { _controller: FOSUserBundle:Security_logout }
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"

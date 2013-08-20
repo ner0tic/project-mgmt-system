@@ -9,26 +9,12 @@ class DeveloperController extends Controller
 {
     /**
      * @Route("/signup/developer", name="developer_registration")
-     * @Template("PMSUserBundle:Developer:register.html.twig")
      */
     public function registerAction()
     {
-        $handler = $this->container->get('pugx_multi_user.controller.handler');
-        $discriminator = $this->container->get('pugx_user_discriminator');
-
-        $return = $handler->registration('PMS\UserBundle\Entity\Developer');
-        $form = $discriminator->getRegistrationForm();
-
-        if ($return instanceof RedirectResponse) {
-            return $return;
-        }
-
-        /** @todo fix this! */
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
-        }
-
-        return array('form' => $form->createView());
+        return $this->container
+                    ->get('pugx_multi_user.registration_manager')
+                    ->register('PMS\UserBundle\Entity\Developer');
     }
 
     /**
@@ -37,6 +23,29 @@ class DeveloperController extends Controller
     public function dashboardAction()
     {
         return array();
+    }
+
+    /**
+     * @Route("/{slug}", name="pms_developer_show")
+     * @Template("PMSUserBundle:Developer:show.html.twig")
+     */
+    public function showAction($slug)
+    {
+        $developer = $this->getDoctrine()
+                        ->getRepository('PMSUserBundle:Developer')
+                        ->findOneBySlug($slug);
+
+        if (!$developer) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'no matching developer found.'
+            );
+            $this->redirect(
+                $this->generateUrl('pms_developer_index')
+            );
+        }
+
+        return array('developer' => $developer);
     }
 
     /**

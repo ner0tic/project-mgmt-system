@@ -23,7 +23,7 @@ trait TimestampableTrait
      * Set created
      *
      * @param datetime $created
-     * @return PunchKind
+     * @return ObjecT
      */
     public function setCreated($created)
     {
@@ -45,7 +45,7 @@ trait TimestampableTrait
      * Set updated
      *
      * @param datetime $updated
-     * @return PunchKind
+     * @return ObjecT
      */
     public function setUpdated($updated)
     {

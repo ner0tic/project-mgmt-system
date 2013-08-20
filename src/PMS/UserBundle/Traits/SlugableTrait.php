@@ -13,7 +13,7 @@ trait SlugableTrait
      * Set slug
      *
      * @param string $slug
-     * @return PunchKind
+     * @return object
      */
     public function setSlug($slug)
     {

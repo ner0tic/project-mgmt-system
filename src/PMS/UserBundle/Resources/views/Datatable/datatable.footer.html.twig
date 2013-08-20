@@ -1,0 +1,10 @@
+{% block datatable_footer %}
+<div class="container table-footer">
+    <div class="pull-left table-details">
+        {{ 'Showing X of Y projects.' }}
+    </div>
+    <div class="pull-right">
+        {{ pagerfanta(pager) }}
+    </div>
+</div>
+{% endblock %}

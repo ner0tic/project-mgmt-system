@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -12,34 +12,71 @@
 
 {% block content %}
 <div class="fluid-row">
-    <div class="left-pane span6" id="project-img-pane">
-        <a href="#">
-            <img src="{{ asset('/bundles/pmsproject/img/' ~ project.slug) }}" />
-        </a>
+    <div class="span12">
+        <h1>
+            <a href="{{ path('pms_project_index') }}">{{ 'projects' | title }}</a>
+            <i class="icon-long-arrow-right"></i>
+            {{ project.name | title }}
+        </h1>
     </div>
-    <div class="right-pane span6" id="project-info-pane">
-        <h1>{{ project.name | title }}</h1>
-        <h2>
-            {{ 'category:' | title }}
-            <a href="#" class="dropdown">{{ project.category | title }}</a>
-            <ul id="category-items">
-            {% for category in project.categories %}
-                {% if category != project.category %}
-                <li class="category-item">
-                    <a href="#">{{ category }}</a>
-                </li>
-                {% endif %}
+    <div class="span6 pull-left" id="project-image">
+        <img src="/bundles/pmsproject/img/projects/{{ project.slug }}/image.png" class="" />
+    </div>
+    <div class="span6 pull-right" id="project-description">
+        {{ project.description }}
+    </div>
+    <div class="span6 pull-left" id="project-details">
+        <ul>
+            <li>
+                <h3>
+                    {{ 'category' | title }}:
+                    <a href="{{ path('pms_category_show', { 'slug': project.Category.slug } ) }}">{{ project.Category.name | title }}</a>
+                </h3>
+            </li>
+            <li>
+                <h3>
+                    {{ 'status' | title }}:
+                    <a href="{{ path('pms_status_show', { 'slug': project.Status.slug } ) }}">{{ project.Status.name | title }}</a>
+                </h3>
+            </li>
+{#}            <li>
+                <h3>
+                    {{ 'client' | title }}:
+                    <a href="{{ path('pms_client_show', { 'slug': project.Client.slug } ) }}">{{ project.Client.name | title }}</a>
+                </h3>
+            </li>
+            <li>
+                <h3>
+                    {{ 'developer' | title | pluralize(project.Developers|length)}}:
+                </h3>
+                <ul>
+                    {% for dev in project.Developers %}
+                    <li>
+                         <a href="{{ path('pms_developer_show', { 'slug': dev.slug })}}">{{ dev.name | title }}</a>
+                     </li>
+                     {% else %}
+                    <li><em>{{ 'no developers assigned.'}}</em></li>
+                    {% endfor %}
+                </ul>
+            </li>
+#}        </ul>
+    </div>
+    <div class="span6 pull-right github" id="project-versioning">
+        <h2>{{ 'github' | title }}:</h2>
+{#}        <ul>
+            {% for commit in project.Github.recent(3) %}
+            <li>
+                <div class="fluid-row">
+                    <div class="commit-msg span12">{{ commit.message }}</div>
+                    <div class="commit-details">
+                        by {{ commit.author }} on {{ commit.timestamp }} to {{ commit.branch }}
+                    </div>
+                </div>
+            </li>
+            {% else %}
+            <li><em>{{ 'no commits found.'}} </em></li>
             {% endfor %}
-            </ul>
-        </h2>
-    </div>
-    <div class="left-pane span6" id="project-punches-pane">
-        <h1>{{ 'punches' | title }}</h1>
-        {% include 'PMSUserBundle::datatable.html.twig' with { 'items': project.punches, 'limit': 5 } %}
-    </div>
-    <div class="right-pane span6" id="project-commits-pane">
-        <h1>{{ 'commits' | title }}</h1>
-        {% include 'PMSUserBundle::datatable.html.twig' with { 'items': project.commits, 'limit': 5 } %}
-    </div>
+        </ul>
+#}    </div>
 </div>
 {% endblock %}
