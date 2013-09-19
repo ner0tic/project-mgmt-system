@@ -48,7 +48,7 @@ class CategoryController extends Controller
         $category = new Category();
         $form = $this->createForm(new CategoryFormType(), $category);
 
-        if ('POST' == $this->request->getMethod()) {
+        if ('POST' == $this->getRequest()->getMethod()) {
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
@@ -95,7 +95,7 @@ class CategoryController extends Controller
             $this->forward('pms_category_index');
         }
 
-        return array('form' => $form);
+        return array('form' => $form->createView());
     }
 
     /**

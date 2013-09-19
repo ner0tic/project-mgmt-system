@@ -92,7 +92,7 @@ class ProjectController extends Controller
             $this->forward('pms_project_index');
         }
 
-        return array('form' => $form);
+        return array('form' => $form->createView());
     }
 
     /**

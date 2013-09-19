@@ -16,6 +16,7 @@ class LoadDeveloperData extends AbstractFixture implements OrderedFixtureInterfa
         $dev1->setEmail('david.durost@gmail.com');
         $dev1->setFirstName('David');
         $dev1->setLastName('Durost');
+        $dev1->setSlug('ner0tic');
         $manager->persist($dev1);
         $this->addReference('dev-david-durost', $dev1);
 

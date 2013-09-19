@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -6,40 +6,35 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('/bundles/pmsuser/css/Base/form.css') }}" rel="stylesheet" />
     <link href="{{ asset('/bundles/pmsuser/css/Base/new.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/bundles/pmsuser/css/Base/form.css') }}" rel="stylesheet" />
     <link href="{{ asset('/bundles/pmsproject/css/status.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
-<div id="form-container">
-    <fieldset>
-        <h2>{{ 'add a status' | title }}</h2>
-        <form action="{{ path( 'ppc_status_new' ) }}" method="post" {{ form_enctype( form ) }}>
+<div class="row-fluid">
+    <div class="span8 container">
+        <h1>{{ 'update a status' | title }}</h1>
+        <form action="{{ path( 'pms_status_new' ) }}" method="post" {{ form_enctype( form ) }}>
         {% block form %}
             <div id="form-errors" class="hidden">
                 {{ form_errors( form ) }}
             </div>
             <div class="row-fluid">
-                <div id="left-pane">
-                    <div class="slider">
-                        {{ form_row( form.name ) }}
-                    </div>
-                    <div class="slider">
-                        {{ form_row( form.description ) }}
-                    </div>
+                <div id="left-pane" class="pull-left">
+                    {{ form_row( form.name ) }}
+                    {{ form_row( form.description ) }}
                 </div>
-                <div class="right-pane">
-                    <div class="slider">
-                        {{ form_rest(form) }}
-                    </div>
-                </div>
-                <div class="slider">
-                    <button class="btn btn-primary btn-block" name="submit">{{ 'add' | title }}</button>
+                <div id="right-pane" class="pull-right">
+                    {{ form_rest(form) }}
                 </div>
             </div>
-            {% endblock %}
+            <div>
+                <button class="btn btn-primary btn-block" name="submit">{{ 'go' | upper }}</button>
+            </div>
+        {% endblock %}
         </form>
-    </fieldset>
+    </div>
+    <div class="span4 container"></div>
 </div>
 {% endblock %}

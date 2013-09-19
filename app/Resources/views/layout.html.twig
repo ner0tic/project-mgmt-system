@@ -32,7 +32,7 @@
         <div class="masthead clearfix">
             <h1 class="pull-left">
                 <i class="icon-bookmark icon-large"></i><br />
-                {{ 'portfolio mgmt system' | title }}
+                <a href="{{ path( 'homepage') }}">{{ 'portfolio mgmt system' | title }}</a>
             </h1>
             {{ knp_menu_render('main') }}
         </div>
@@ -64,7 +64,6 @@
     {% block javascripts %}
       <script src="{{ asset('/bundles/pmsuser/js/jquery-1.9.1.js') }}"></script>
       <script src="{{ asset('/bundles/pmsuser/js/bootstrap.js') }}"></script>
-      <script src="{{ asset('/bundles/pmsuser/js/twitter-bootstrap-hover-dropdown.js' ) }}"></script>
     {% endblock %}
 {% endblock %}
 </body>

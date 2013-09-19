@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -13,8 +13,40 @@
 {% block content %}
 <div class="fluid-row">
     <div class="span12">
-        <h1>{{ 'statuses' | title }}</h1>
-        {% include 'PMSUserBundle::datatable.html.twig' with { 'items': statuses } %}
+        <h1>
+            {{ 'project statuses' | title }}
+            {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path( 'pms_status_new' ) }}" alt="{{ 'add a status' }}">
+                <i class="icon-plus pull-right"></i>
+           </a>
+           {% endif %}
+        </h1>
+
+        {% block datatable %}
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <a href="#" class="sort-toggle">{{ 'name' | title }}</a>
+                </th>
+                <th>{{ 'description' | title }}</th>
+                <td></td>
+            </tr>
+            {% for status in statuses %}
+            <tr>
+                <td><a href="{{ path( 'pms_status_show', { 'slug': status.slug } ) }}">{{ status.name }}</a></td>
+                <td>{{ status.description }}</td>
+                {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'slug': status.slug, 'type': 'status' } %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">
+                    <em>{{ 'no statuses found.' | title }}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% include 'PMSUserBundle:Datatable:datatable.footer.html.twig' with { 'pager': pager } %}
+        {% endblock %}
     </div>
 </div>
 {% endblock %}

@@ -3,7 +3,7 @@ security:
         connection: default
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username_email
+            id: fos_user.user_provider.username #_email
 
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
@@ -13,6 +13,8 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
+                login_path: /signin
+                check_path: /signin-check
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true

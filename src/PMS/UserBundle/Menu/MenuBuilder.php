@@ -21,11 +21,9 @@ class MenuBuilder extends ContainerAware
     {
         $menu = $this->factory->createItem(
             'projects',
-            array(
-                'route' => 'pms_project_index',
-                'attributes' => array('dropdown' => true)
-            )
+            array('attributes' => array('dropdown' => true))
         );
+        $menu->addChild('list projects', array('route' => 'pms_project_index'));
 
         $menu->addChild('find a project', array('route' => 'pms_project_search'));
 
@@ -128,7 +126,7 @@ class MenuBuilder extends ContainerAware
 
         $menu->addChild('change password', array('route' => 'fos_user_change_password'));
 
-        $menu->addChild('add a developer', array('route' => 'fos_user_security_logout'));
+        $menu->addChild('sign out', array('route' => 'fos_user_security_logout'));
 
         return $menu;
     }
@@ -165,6 +163,34 @@ class MenuBuilder extends ContainerAware
 
             $menu->addChild('sign in', array('route' => 'fos_user_security_login'));
 
+        }
+
+        return $menu;
+    }
+
+    public function createDatatableControlMenu(Request $request, ContainerInterface $container)
+    {
+        $this->securityContext = $container->get('security.context');
+
+        $menu = $this->factory->createItem('root');
+
+        $menu->setChildrenAttribute('class', 'nav datatable-controls');
+
+        $menu->addChild(
+            "<i class=\"icon-view icon-large pull-left\"></i>preview",
+            array('route'=>'homepage')
+        );
+
+        if ($this->securityContext->isGranted('ROLE_DEVELOPER_ADMIN')) {
+            $menu->addChild(
+                "<i class=\"icon-edit icon-large pull-left\"></i>edit",
+                array('route'=>'homepage')
+            );
+
+            $menu->addChild(
+                "<i class=\"icon-trash icon-large pull-left\"></i>remove",
+                array('route' => 'homepage')
+            );
         }
 
         return $menu;

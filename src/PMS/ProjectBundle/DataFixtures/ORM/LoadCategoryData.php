@@ -14,11 +14,11 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
     public function load(ObjectManager $manager)
     {
         $category1 = new Category();
-        $category1->setName('category demo 1');
-        $category1->setDescription('demo category.');
+        $category1->setName('web development');
+        $category1->setDescription('web dev.');
         $category1->setParent();
         $manager->persist($category1);
-        $this->addReference('category-demo1', $category1);
+        $this->addReference('category-web-dev', $category1);
 
         $category2 = new Category();
         $category2->setName('category demo 2');

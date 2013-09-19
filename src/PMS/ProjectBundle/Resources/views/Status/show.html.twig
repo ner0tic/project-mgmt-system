@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -12,9 +12,17 @@
 
 {% block content %}
 <div class="fluid-row">
-    <h1>{{ status.name | title }}</h1>
-    <p>{{ status.description }}</p>
-    {% if status.parent exists %}
-    <p>{{ status.parent }}</p>
+    <div class="span12">
+        <h1>
+            <a href="{{ path('pms_status_index') }}">{{ 'statuses' | title }}</a>
+            <i class="icon-arrow-right"></i>
+            <a href="#">{{ status.name | title }}</a>
+        </h1>
+    </div>
+    <div class="span8">
+        <h1>{{ status.name | title }}</h1>
+        <p>{{ status.description }}</p>
+    </div>
+    <div class="span4"></div>
 </div>
 {% endblock %}

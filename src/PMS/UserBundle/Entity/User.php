@@ -34,8 +34,10 @@ abstract class User extends BaseUser
     use TimestampableTrait;
 
     /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
@@ -48,41 +50,5 @@ abstract class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-
-    protected $slug;
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return PunchKind
-     */
-    public function setSlug($slug = null)
-    {
-        if (null == $slug) {
-            $this->slug = str_replace(
-                ' ',
-                '-',
-                $this->getFullName()
-            );
-        }
-
-        return $this;
-    }
-
-    public function getName()
-    {
-        return $this->first_name.' '.$this->last_name;
     }
 }

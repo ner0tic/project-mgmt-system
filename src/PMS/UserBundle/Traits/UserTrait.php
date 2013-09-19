@@ -3,6 +3,7 @@ namespace PMS\UserBundle\Traits;
 
 trait UserTrait
 {
+
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
@@ -65,11 +66,66 @@ trait UserTrait
     protected $foursquareId;
 
     /**
+     * @ORM\Column(name="url", type="string", length=255)
+     */
+    protected $url = "";
+
+    /**
+     * @ORM\Column(name="bio", type="text")
+     */
+    protected $bio = "";
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
+     * @ORM\Column(name="avatar", type="string", length=255)
      */
     protected $avatar = '/bundles/pmsuser/img/avatars/default.png';
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+    * @Gedmo\Slug(fields={"last_name", "first_name"})
+    * @ORM\Column(length=128, unique=true)
+    */
+    protected $slug;
+
+    /**
+     * Get slug
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug
+     */
+    public function setSlug($slug = null)
+    {
+        if (null == $slug) {
+            $this->slug = str_replace(
+                ' ',
+                '-',
+                $this->getName()
+            );
+        }
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
 
     /**
      * Get the full name of the user (first + last name)
@@ -270,4 +326,29 @@ trait UserTrait
     {
         return $this->avatar;
     }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
 }

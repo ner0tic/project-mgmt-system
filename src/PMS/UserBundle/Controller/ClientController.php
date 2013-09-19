@@ -4,6 +4,13 @@ namespace PMS\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+use PMS\UserBundle\Entity\Client;
+use PMS\UserBundle\Form\Type\ClientFormType;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\View\TwitterBootstrapView;
 
 class ClientController extends Controller
 {
@@ -26,14 +33,15 @@ class ClientController extends Controller
     }
 
     /**
-     * @Route("/{slug}", name="pms_client_show")
+     * @Route("/clients/{slug}", name="pms_client_show")
      * @Template("PMSUserBundle:Client:show.html.twig")
      */
     public function showAction($slug)
     {
         $client = $this->getDoctrine()
-                        ->getRepository('PMSUserBundle:Client')
-                        ->findOneBySlug($slug);
+                        ->getRepository('PMSUserBundle:User')
+                        ->findOneBySlug($slug)
+                        ->andWhere('type = client');
 
         if (!$client) {
             $this->get('session')->getFlashBag()->add(
@@ -54,6 +62,20 @@ class ClientController extends Controller
      */
     public function indexAction()
     {
-        return array();
+
+        // get route name/params to decypher data to delimit by
+        $query = $this->get('doctrine')
+                          ->getRepository('PMSUserBundle:Client')
+                          ->createQueryBuilder('c')
+                          ->orderBy('c.last_name', 'ASC');
+
+        $pager = new Pagerfanta(new DoctrineORMAdapter($query));
+        $pager->setMaxPerPage($this->getRequest()->get('pageMax', 5));
+        $pager->setCurrentPage($this->getRequest()->get('page', 1));
+
+        return array(
+          'clients' => $pager->getCurrentPageResults(),
+          'pager'  => $pager
+        );
     }
 }

@@ -21,12 +21,16 @@ trait ProjectTrait
     protected $name;
 
     /**
+     * @ORM\Column(name="short_description", type="string", length=30)
+     */
+    protected $short_description;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="description", type="text")
-     * @Assert\Blank()
      */
-    protected $description;
+    protected $description = '';
 
     /**
      * @var string $url
@@ -53,6 +57,11 @@ trait ProjectTrait
      */
     protected $client;
 
+    /**
+     * @ORM\OneToMany(targetEntity="PMS\UserBundle\Entity\Developer", mappedBy="project")
+     */
+    protected $developers;
+
     public function getId()
     {
         return $this->id;
@@ -73,6 +82,18 @@ trait ProjectTrait
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getShortDescription()
+    {
+        return $this->short_description;
+    }
+
+    public function setShortDescription($description)
+    {
+        $this->short_description = $description;
 
         return $this;
     }
@@ -141,5 +162,22 @@ trait ProjectTrait
         }
 
         return $this;
+    }
+
+    public function addDeveloper(PMS\UserBundle\Entity\Developer $developer)
+    {
+        $this->developers[] = $developer;
+
+        return $this;
+    }
+
+    public function getDevelopers()
+    {
+        return $this->developers;
+    }
+
+    public function removeDeveloper(PMS\UserBundle\Entity\Developer $developer)
+    {
+        $this->developers->removeElement($developer);
     }
 }

@@ -1,0 +1,58 @@
+{% extends '::layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/bundles/pmsuser/css/Base/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/bundles/pmsproject/css/client.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="fluid-row">
+    <div class="span12">
+        <h1>
+            {{ 'clients' | title }}
+            {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path( 'pms_client_new' ) }}" alt="{{ 'add a client' }}">
+                <i class="icon-plus pull-right"></i>
+           </a>
+           {% endif %}
+        </h1>
+
+        {% block datatable %}
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <a href="#" class="sort-toggle">{{ 'last name' | title }}</a>
+                </th>
+                <th>{{ 'first name' | title }}</th>
+                <th>{{ 'email address' | title }}</th>
+                <th>{{ 'company' | title }}</th>
+                <th>{{ 'homepage' | title }}</th>
+                <td></td>
+            </tr>
+            {% for client in clients %}
+            <tr>
+                <td><a href="{{ path( 'pms_client_show', { 'slug': client.slug } ) }}">{{ client.lastname }}</a></td>
+                <td>{{ client.firstname }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.company }}</td>
+                <td><a href="{{ client.url }}" target="window">{{ client.url }}</a></td>
+                {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'slug': client.slug, 'type': 'client' } %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">
+                    <em>{{ 'no clients found.' | title }}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% include 'PMSUserBundle:Datatable:datatable.footer.html.twig' with { 'pager': pager } %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

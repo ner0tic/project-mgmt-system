@@ -103,6 +103,7 @@ doctrine:
                 mappings:
                     FOSUserBundle: ~
                     PMSUserBundle: ~
+                    PUGXMultiUserBundle: ~
                     gedmo_translatable:
                         type: annotation
                         prefix: Gedmo\Translatable\Entity

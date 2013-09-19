@@ -1,0 +1,59 @@
+{% extends '::layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/bundles/pmsuser/css/Base/index.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/bundles/pmsproject/css/developer.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="fluid-row">
+    <div class="span12">
+        <h1>
+            {{ 'developers' | title }}
+            {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path( 'pms_developer_new' ) }}" alt="{{ 'add a developer' }}">
+                <i class="icon-plus pull-right"></i>
+           </a>
+           {% endif %}
+        </h1>
+
+        {% block datatable %}
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <a href="#" class="sort-toggle">{{ 'last name' | title }}</a>
+                </th>
+                <th>{{ 'first name' | title }}</th>
+                <th>{{ 'email address' | title }}</th>
+                <th>{{ 'portfolio' | title }}</th>
+                <th>{{ 'bio' | title }}</th>
+                <td></td>
+            </tr>
+            {% for developer in developers %}
+            <tr>
+                <td><a href="{{ path( 'pms_developer_show', { 'slug': developer.slug } ) }}">{{ developer.lastname }}</a></td>
+                <td>{{ developer.firstname }}</td>
+                <td>{{ developer.email }}</td>
+                <td><a href="{{ path( 'pms_developer_project_index', { 'slug': developer.slug }) }}">{{ 'view portfolio' | title }}
+                </a></td>
+                <td>{{ developer.bio~'...' }}</td>
+                {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'slug': developer.slug, 'type': 'developer' } %}
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">
+                    <em>{{ 'no developers found.' | title }}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% include 'PMSUserBundle:Datatable:datatable.footer.html.twig' with { 'pager': pager } %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

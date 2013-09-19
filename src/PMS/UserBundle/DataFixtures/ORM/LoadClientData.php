@@ -16,6 +16,7 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
         $client_self->setEmail('david@daviddurost.net');
         $client_self->setFirstName('David');
         $client_self->setLastName('Durost');
+        $client_self->setSlug('ddurost');
         $manager->persist($client_self);
         $this->addReference('client-david-durost', $client_self);
 
