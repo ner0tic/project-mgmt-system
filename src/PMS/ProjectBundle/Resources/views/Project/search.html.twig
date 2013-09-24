@@ -6,7 +6,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('/bundles/pmsuser/css/Base/new.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/bundles/pmsuser/css/Base/search.css') }}" rel="stylesheet" />
     <link href="{{ asset('/bundles/pmsuser/css/Base/form.css') }}" rel="stylesheet" />
     <link href="{{ asset('/bundles/pmsproject/css/project.css') }}" rel="stylesheet" />
 {% endblock %}
@@ -14,8 +14,8 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span8 container">
-        <h1>{{ 'update a project' | title }}</h1>
-        <form action="{{ path( 'pms_project_new' ) }}" method="post" {{ form_enctype( form ) }}>
+        <h1>{{ 'find a project' | title }}</h1>
+        <form action="{{ path( 'pms_project_search' ) }}" method="post" {{ form_enctype( form ) }}>
         {% block form %}
             <div id="form-errors" class="hidden">
                 {{ form_errors( form ) }}
@@ -23,32 +23,16 @@
             <div class="row-fluid">
                 <div id="left-pane" class="pull-left">
                     <div>
-                        {{ form_row( form.name ) }}
-                    </div>
-                    <div>
-                        {{ form_row( form.status ) }}
-                    </div>
-                    <div>
-                        {{ form_row( form.category ) }}
+                        {{ form_row( form.query ) }}
                     </div>
                 </div>
                 <div id="right-pane" class="pull-right">
                     <div>
-                        {{ form_row( form.short_description ) }}
-                    </div>
-                    <div>
-                        {{ form_row( form.description ) }}
-                    </div>
-                    <div>
-                        {{ form_row( form.url ) }}
-                    </div>
-                    <div>
-                        {{ form_row( form.client ) }}
+                        {{ form_rest(form) }}
                     </div>
                 </div>
             </div>
             <div>
-                {{ form_rest(form) }}
                 <button class="btn btn-primary btn-block pull-right" name="submit">{{ 'go' | upper }}</button>
             </div>
         {% endblock %}

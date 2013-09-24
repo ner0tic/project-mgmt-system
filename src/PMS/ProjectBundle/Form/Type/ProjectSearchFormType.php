@@ -5,14 +5,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use PMS\Project\Entity\Project;
 
-class ProjectFormType extends AbstractType
+class ProjectSearchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
-        $builder->add('short_description');
-        $builder->add('description');
-        $builder->add('url', 'url');
+        $builder->add(
+            'query',
+            'search'
+        );
         $builder->add(
             'status',
             'entity',
@@ -41,6 +41,6 @@ class ProjectFormType extends AbstractType
 
     public function getName()
     {
-        return 'project';
+        return 'project_search';
     }
 }

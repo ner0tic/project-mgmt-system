@@ -67,10 +67,12 @@
 
         "jms/security-extra-bundle":                                    "1.5.*@dev",
         "jms/di-extra-bundle":                                          "1.4.*@dev",
+        "jms/serializer-bundle":                                                "*",
 
         "gedmo/doctrine-extensions":                                    "2.3.x-dev",
         "stof/doctrine-extensions-bundle":                               "~1.1@dev",
 
+        "friendsofsymfony/elastica-bundle":                             "3.0.*@dev",
         "friendsofsymfony/user-bundle":                                 "2.0.*@dev",
         "pugx/multi-user-bundle":                                       "3.0.*@dev",
 

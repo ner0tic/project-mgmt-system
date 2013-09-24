@@ -164,6 +164,25 @@ fos_user:
 #  secret: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #  cookie: true
 #  permissions: [email, user_birthday, user_location]
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
+    indexes:
+        website:
+            client: default
+            types:
+                project:
+                    mappings:
+                        name: { boost: 5 }
+                        short_description: { boost: 3 }
+                        description: { boost: 3 }
+                    persistence:
+                        driver: orm
+                        model: PMS\ProjectBundle\Entity\Project
+                        provider: ~
 
 ################################################################################
 ## JMS Configuration

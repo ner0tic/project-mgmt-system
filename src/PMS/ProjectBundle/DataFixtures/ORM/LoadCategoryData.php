@@ -13,19 +13,19 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $category1 = new Category();
-        $category1->setName('web development');
-        $category1->setDescription('web dev.');
-        $category1->setParent();
-        $manager->persist($category1);
-        $this->addReference('category-web-dev', $category1);
+        $webdev = new Category();
+        $webdev->setName('web development');
+        $webdev->setDescription('web dev.');
+        $webdev->setParent();
+        $manager->persist($webdev);
+        $this->addReference('category-web-dev', $webdev);
 
-        $category2 = new Category();
-        $category2->setName('category demo 2');
-        $category2->setDescription('another demo category');
-        $category2->setParent($this->getReference('category-demo1'));
-        $manager->persist($category2);
-        $this->addReference('category-demo2', $category2);
+        $symfony = new Category();
+        $symfony->setName('symfony');
+        $symfony->setDescription('symfony category');
+        $symfony->setParent($this->getReference('category-web-dev'));
+        $manager->persist($symfony);
+        $this->addReference('category-web-dev-symfony', $symfony);
 
         $manager->flush();
     }

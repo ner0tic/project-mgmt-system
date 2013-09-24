@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use PMS\ProjectBundle\Entity\Project;
 use PMS\ProjectBundle\Form\Type\ProjectFormType;
+use PMS\ProjectBundle\Form\Type\ProjectSearchFormType;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
@@ -46,7 +47,7 @@ class ProjectController extends Controller
         $form = $this->createForm(new ProjectFormType(), $project);
 
         if ("POST" == $request->getMethod()) {
-            $form->bind($this->getRequest());
+            $form->handleRequest($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($project);
@@ -60,7 +61,7 @@ class ProjectController extends Controller
                 return $this->render(
                     'PMSProjectBundle:Project:show.html.twig',
                     array(
-                        'project_slug' => $project->getSlug()
+                        'project' => $project
                     )
                 );
             }
@@ -102,7 +103,24 @@ class ProjectController extends Controller
      */
     public function searchAction($query = null)
     {
-        return array();
+        $form = $this->createForm(new ProjectSearchFormType());
+
+        if ("POST" == $request->getMethod()) {
+            $form->bind($this->getRequest());
+            if ($form->isValid()) {
+                // query db
+                $projects = array();
+
+                return $this->render(
+                    'PMSProjectBundle:Project:index.html.twig',
+                    array(
+                        'projects' => $projects
+                    )
+                );
+            }
+        }
+
+        return array('form' => $form);
     }
 
     /**

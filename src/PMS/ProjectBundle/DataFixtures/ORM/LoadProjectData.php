@@ -18,7 +18,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $ddnet->setUrl('http://daviddurost.net');
         $ddnet->setShortDescription('portfolio site.');
         $ddnet->setStatus($this->getReference('status-complete'));
-        $ddnet->setCategory($this->getReference('category-web'));
+        $ddnet->setCategory($this->getReference('category-web-dev'));
         $ddnet->setClient($this->getReference('client-david-durost'));
         $ddnet->setDescription('project portfolio site.');
         $manager->persist($ddnet);
@@ -29,7 +29,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $ridesocial->setUrl('http://daviddurost.net/projects/ridesocial');
         $ridesocial->setShortDescription('social ride sharing network.');
         $ridesocial->setStatus($this->getReference('status-active'));
-        $ridesocial->setCategory($this->getReference('category-symfony'));
+        $ridesocial->setCategory($this->getReference('category-web-dev-symfony'));
         $ridesocial->setClient($this->getReference('client-david-durost'));
         $ridesocial->setDescription('social ride sharing network.');
         $manager->persist($ridesocial);
@@ -40,7 +40,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $scss->setUrl('http://daviddurost.net/projects/summer-camp-scheduling-system');
         $scss->setShortDescription('course management system.');
         $scss->setStatus($this->getReference('status-active'));
-        $scss->setCategory($this->getReference('category-symfony'));
+        $scss->setCategory($this->getReference('category-web-dev-symfony'));
         $scss->setClient($this->getReference('client-david-durost'));
         $scss->setDescription('multi-portaled course management system.');
         $manager->persist($scss);

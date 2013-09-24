@@ -37,7 +37,7 @@
             {% for project in projects %}
             <tr>
                 <td><a href="{{ path( 'pms_project_show', { 'slug': project.slug } ) }}">{{ project.name }}</a></td>
-                <td>{{ project.short_description }}</td>
+                <td>{{ project.shortDescription }}</td>
                 <td><a href="{{ path( 'pms_status_show', { 'slug': project.Status.slug } ) }}">{{ project.Status.name }}</a></td>
                 <td><a href="{{ path( 'pms_category_show', { 'slug': project.Category.slug } ) }}">{{ project.Category.name }}</a></td>
                 {% include 'PMSUserBundle:Datatable:datatable.controls.html.twig' with { 'slug': project.slug, 'type': 'project' } %}

@@ -1,10 +1,12 @@
 {% block datatable_footer %}
 <div class="container table-footer">
     <div class="pull-left table-details">
-        {{ 'Showing X of Y items.' | lower }}
+        {{ 'Showing '~pager.currentPageResults|length~' of '~pager.nbResults~' items.' | lower }}
     </div>
     <div class="pull-right">
+        {% if pager.haveToPaginate %}
         {{ pagerfanta(pager) }}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
